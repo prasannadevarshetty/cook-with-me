@@ -1,0 +1,24 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+        <h2>{{ recipe.title }}</h2>
+        <span class="badge">{{ recipe.category }}</span>
+    </div>
+    <p style="color:#666;margin-bottom:1.5rem">{{ recipe.description }}</p>
+    
+    <h3 style="margin-bottom:8px">Ingredients</h3>
+    <p style="background:#fef9f0;padding:1rem;border-radius:4px;margin-bottom:1.5rem;white-space:pre-line">{{ recipe.ingredients }}</p>
+    
+    <h3 style="margin-bottom:8px">Instructions</h3>
+    <p style="background:#fef9f0;padding:1rem;border-radius:4px;margin-bottom:1.5rem;white-space:pre-line">{{ recipe.instructions }}</p>
+    
+    <p style="color:#888;font-size:13px">Added on: {{ recipe.created_at|date:"d M Y" }}</p>
+    
+    <div style="margin-top:1.5rem">
+        <a href="{% url 'recipe_edit' recipe.pk %}" class="btn btn-success">Edit</a>
+        <a href="{% url 'recipe_delete' recipe.pk %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'recipe_list' %}" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock %}

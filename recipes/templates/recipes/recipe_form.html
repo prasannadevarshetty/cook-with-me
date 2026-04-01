@@ -1,0 +1,32 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+<div class="card" style="max-width:600px;margin:2rem auto">
+    <h2 style="margin-bottom:1.5rem">{{ action }} Recipe</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Title</label>
+        <input type="text" name="title" value="{{ recipe.title }}" required>
+        
+        <label>Description</label>
+        <textarea name="description" rows="2">{{ recipe.description }}</textarea>
+        
+        <label>Category</label>
+        <select name="category">
+            <option value="breakfast" {% if recipe.category == 'breakfast' %}selected{% endif %}>Breakfast</option>
+            <option value="lunch" {% if recipe.category == 'lunch' %}selected{% endif %}>Lunch</option>
+            <option value="dinner" {% if recipe.category == 'dinner' %}selected{% endif %}>Dinner</option>
+            <option value="snack" {% if recipe.category == 'snack' %}selected{% endif %}>Snack</option>
+            <option value="dessert" {% if recipe.category == 'dessert' %}selected{% endif %}>Dessert</option>
+        </select>
+        
+        <label>Ingredients (one per line)</label>
+        <textarea name="ingredients" rows="5">{{ recipe.ingredients }}</textarea>
+        
+        <label>Instructions (one per line)</label>
+        <textarea name="instructions" rows="5">{{ recipe.instructions }}</textarea>
+        
+        <button type="submit" class="btn btn-primary" style="width:100%">{{ action }} Recipe</button>
+        <a href="{% url 'recipe_list' %}" style="display:block;text-align:center;margin-top:1rem">Cancel</a>
+    </form>
+</div>
+{% endblock %}

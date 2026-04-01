@@ -1,0 +1,30 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+    <h2>All Recipes</h2>
+    <a href="{% url 'recipe_create' %}" class="btn btn-primary">+ Add Recipe</a>
+</div>
+
+{% if recipes %}
+    {% for recipe in recipes %}
+    <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+                <h3 style="margin-bottom:6px">{{ recipe.title }}</h3>
+                <p style="color:#666;font-size:14px;margin-bottom:8px">{{ recipe.description }}</p>
+                <span class="badge">{{ recipe.category }}</span>
+            </div>
+            <div>
+                <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-primary">View</a>
+                <a href="{% url 'recipe_edit' recipe.pk %}" class="btn btn-success">Edit</a>
+                <a href="{% url 'recipe_delete' recipe.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card" style="text-align:center;padding:3rem">
+        <p style="color:#888;font-size:1.1rem">No recipes yet! Click "+ Add Recipe" to get started.</p>
+    </div>
+{% endif %}
+{% endblock %}
